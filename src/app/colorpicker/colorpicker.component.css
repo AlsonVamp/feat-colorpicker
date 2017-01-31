@@ -1,0 +1,19 @@
+.result-color{
+    width: 40px;
+    height: 40px;
+}
+.side-panel {
+    display: inline-block;
+    vertical-align: top;
+    border:2px solid red;
+}
+feat-palette {
+    display: inline-block;
+    /*canvas allready have 4px margin-right*/
+    border:0 solid gray;
+    border-right-width: 2px;
+}
+:host {
+    display: inline-block;
+    border: 2px solid gray;
+}
