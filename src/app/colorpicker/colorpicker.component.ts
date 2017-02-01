@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     //moduleId: module.id,
@@ -9,10 +9,12 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 export class ColorpickerComponent implements AfterViewInit {
     ctx: CanvasRenderingContext2D;
     color: string = "white";
+    @Output() colorChanged = new EventEmitter();
     constructor() { }
     @ViewChild('lightness') canvasRef: ElementRef;
     onColorChange(color: string) {
         this.color = color;
+        this.colorChanged.emit(this.color);
         this.updateLightness();
     }
     updateLightness() {
@@ -35,6 +37,7 @@ export class ColorpickerComponent implements AfterViewInit {
             let strCV: string = cv.toString(16);
             return pv + (strCV.length == 2 ? strCV : ("0" + strCV));
         }, "#")
+        this.colorChanged.emit(this.color);
     }
     ngAfterViewInit() {
         this.ctx =
