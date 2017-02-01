@@ -17,12 +17,12 @@ export class ColorpickerComponent implements AfterViewInit {
     }
     updateLightness() {
         this.ctx.clearRect(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
-        let grd = this.ctx.createLinearGradient(0, 0, 0, 150);
+        let grd = this.ctx.createLinearGradient(0, 0, 0, 160);
         grd.addColorStop(0, this.color);
         grd.addColorStop(1, "black");
 
         this.ctx.fillStyle = grd;
-        this.ctx.fillRect(0, 0, 40, 150);
+        this.ctx.fillRect(0, 0, 40, 160);
     }
     onLightnessClick(data: MouseEvent) {
         let rect = this.canvasRef.nativeElement.getBoundingClientRect();
@@ -37,7 +37,6 @@ export class ColorpickerComponent implements AfterViewInit {
         }, "#")
     }
     ngAfterViewInit() {
-        console.log(this.canvasRef);
         this.ctx =
             this.canvasRef.nativeElement.getContext('2d');
         this.updateLightness();
