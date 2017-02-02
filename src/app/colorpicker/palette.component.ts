@@ -23,20 +23,26 @@ export class PaletteComponent implements OnInit {
         Math.round(raw_colors[2] * raw_colors[3] / 255)].reduce((pv, cv) => {
             let strCV: string = cv.toString(16);
             return pv + (strCV.length == 2 ? strCV : ("0" + strCV));
-        }, "#")
-        /*
-        .reduce((pv, cv) => {
-                //Convert from 8-bit array to color hex string
-                let strCV: string = cv.toString(16);
-                return pv + (strCV.length == 2 ? strCV : ("0" + strCV));
-            }, '#').
-            slice(0, 7);
-            */
+        }, "#");
+        
+        this.setPointer(x, y);
         this.colorChanged.emit(this.color);
+    }
+    setPointer(centerX: number, centerY: number) {
+        this.drawBackground();
+        setTimeout(() => {
+            this.ctx.beginPath();
+            this.ctx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+            this.ctx.stroke();
+        }, 1);
+
     }
     ngOnInit() {
         this.ctx =
             this.canvasRef.nativeElement.getContext('2d');
+        this.drawBackground();
+    }
+    drawBackground() {
         let ctx = this.ctx;
         let image = new Image();
         image.onload = function () {
